@@ -21,9 +21,6 @@ public class HomeControllerUnitTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    //bean.get.endpoint=/{version}/greeting
-    //bean.get.endpoint.message=/{version}/greeting/{message}
-
     @ParameterizedTest
     @ValueSource(strings = {"1.0", "2.0"})
     public void greetingWithVersion(String version) throws Exception {
