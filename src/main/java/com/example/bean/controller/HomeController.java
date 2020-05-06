@@ -1,5 +1,6 @@
 package com.example.bean.controller;
 
+import com.example.bean.annotation.VersionHandlerController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,12 @@ public class HomeController {
     VersionHandlerController versionController;
 
     @GetMapping("${bean.get.endpoint}")
-    public ResponseEntity getGreeting(@PathVariable String version) throws InvocationTargetException, IllegalAccessException, InstantiationException {
+    public ResponseEntity getGreeting(@PathVariable String version){
         return versionController.findVersionHandler("${bean.get.endpoint}", version, HttpMethod.GET);
     }
 
     @GetMapping("${bean.get.endpoint.message}")
-    public ResponseEntity getGreeting(@PathVariable String version, @PathVariable String message) throws InvocationTargetException, IllegalAccessException, InstantiationException {
+    public ResponseEntity getGreeting(@PathVariable String version, @PathVariable String message) {
         return versionController.findVersionHandler("${bean.get.endpoint.message}", version, HttpMethod.GET, message);
     }
 }

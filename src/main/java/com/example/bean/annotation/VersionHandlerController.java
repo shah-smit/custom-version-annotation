@@ -1,10 +1,11 @@
-package com.example.bean.controller;
+package com.example.bean.annotation;
 
 import com.example.bean.annotation.VersionGetHandler;
 import com.example.bean.annotation.VersionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,7 @@ public class VersionHandlerController {
     private ApplicationContext applicationContext;
 
 
-    public ResponseEntity findVersionHandler(String endpoint, String version, HttpMethod httpMethod, Object... args) throws InvocationTargetException, IllegalAccessException, InstantiationException {
+    public ResponseEntity findVersionHandler(String endpoint, String version, HttpMethod httpMethod, Object... args) {
 
             String[] allBeanNames = applicationContext.getBeanDefinitionNames();
             for(String beanName : allBeanNames) {
@@ -36,7 +37,12 @@ public class VersionHandlerController {
                                 if(versionGetHandler.endpoint().equals(endpoint)){
                                     var constructors = annotatedClass.getConstructors();
 
-                                    Object result = method.invoke(constructors[0].newInstance(), args);
+                                    Object result = null;
+                                    try {
+                                        result = method.invoke(constructors[0].newInstance(), args);
+                                    } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
+                                        return ResponseEntity.unprocessableEntity().build();
+                                    }
 
                                     return ResponseEntity.accepted().body(result);
                                 }
