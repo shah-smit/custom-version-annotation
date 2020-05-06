@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @VersionHandler(version = "1.0")
-public class HomeHandler {
+public class HomeTwoHandler {
 
-    @VersionGetHandler(endpoint = "${bean.get.endpoint}")
-    public String getGreeting(){
-        return "Greeting from v1.0";
+    @VersionGetHandler(endpoint = "${bean.get.endpoint.message}")
+    public String giveMeGreeting(String message){
+        return message+" v1.0";
     }
 }
