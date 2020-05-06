@@ -1,7 +1,4 @@
-Feature: Greeting
-
-#  - /{version}/greeting
-#  - /{version}/greeting/{message}
+Feature: GET Greeting
 
   Background:
     * url baseURL
