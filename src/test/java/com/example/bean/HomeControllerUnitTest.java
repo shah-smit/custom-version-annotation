@@ -1,5 +1,6 @@
 package com.example.bean;
 
+import com.example.bean.model.GreetingRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -9,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class HomeControllerUnitTest {
@@ -35,5 +39,16 @@ public class HomeControllerUnitTest {
         assertThat(this.restTemplate
                 .getForObject("http://localhost:" + port + "/"+version+"/greeting/"+message, String.class))
                 .contains(message+" v"+version);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1.0,Hi from", "2.0,Hello from"})
+    public void greetingWithBodyMessage(String version, String message){
+        GreetingRequest greetingRequest = new GreetingRequest();
+        greetingRequest.setMessage(message);
+        ResponseEntity<String> result = this.restTemplate
+                            .postForEntity("http://localhost:" + port + "/"+version+"/greeting/", greetingRequest, String.class);
+
+        assertEquals(result.getBody(), message+" v"+version);
     }
 }

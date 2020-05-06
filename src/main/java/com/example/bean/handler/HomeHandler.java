@@ -2,6 +2,7 @@ package com.example.bean.handler;
 
 import com.example.bean.annotation.VersionGetHandler;
 import com.example.bean.annotation.VersionHandler;
+import com.example.bean.annotation.VersionPostHandler;
 import org.springframework.stereotype.Component;
 
 @Component

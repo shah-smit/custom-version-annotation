@@ -35,7 +35,7 @@ public class VersionHandlerController {
                     return ResponseEntity.unprocessableEntity().build();
                 }
 
-                return ResponseEntity.accepted().body(result);
+                return ResponseEntity.ok().body(result);
             }
         }
 
@@ -62,12 +62,22 @@ public class VersionHandlerController {
         Method[] methods = currentClass.getMethods();
         for (Method method : methods) {
 
-            if (method.isAnnotationPresent(VersionGetHandler.class) &&
-                    httpMethod.matches("GET")) {
-                VersionGetHandler versionGetHandler = method.getAnnotation(VersionGetHandler.class);
+            if (method.isAnnotationPresent(VersionGetHandler.class)) {
+                if(httpMethod.matches("GET")) {
+                    VersionGetHandler versionGetHandler = method.getAnnotation(VersionGetHandler.class);
 
-                if (versionGetHandler.endpoint().equals(endpoint)) {
-                    return method;
+                    if (versionGetHandler.endpoint().equals(endpoint)) {
+                        return method;
+                    }
+                }
+            }
+            if (method.isAnnotationPresent(VersionPostHandler.class)) {
+                if(httpMethod.matches("POST")) {
+                    VersionPostHandler versionPostHandler = method.getAnnotation(VersionPostHandler.class);
+
+                    if (versionPostHandler != null && versionPostHandler.endpoint().equals(endpoint)) {
+                        return method;
+                    }
                 }
             }
         }
