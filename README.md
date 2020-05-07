@@ -1,5 +1,7 @@
 # Spring Version Handler Annotation
 
+![Java CI with Maven](https://github.com/shah-smit/custom-version-annotation/workflows/Java%20CI%20with%20Maven/badge.svg)
+
 ### Features
 There are two end-point
 - /{version}/greeting
