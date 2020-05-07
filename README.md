@@ -4,8 +4,15 @@
 
 ### Features
 There are two end-point
-- /{version}/greeting
-- /{version}/greeting/{message}
+- GET /{version}/greeting
+- GET /{version}/greeting/{message}
+- POST /{version/greeting
+request body sample:
+```json5
+{
+  "message": "Hello World"
+}
+```
 
 There are two versions `1.0` and `2.0`
 
