@@ -53,3 +53,26 @@ For the endpoint `/2.0/greeting/Hello from` the project will return `Hello from 
 
 ---
 
+### Others
+
+#### Pre-Commit Scripts
+
+```bash
+#!/bin/sh
+
+echo "Precommiting script started"
+
+mvn clean test
+
+# nohup mvn spring-boot:run &
+
+sleep 10
+
+cd karate/
+
+# mvn test -Dtest=testRunner
+
+cd ..
+
+echo "Successfully Completed"
+```
