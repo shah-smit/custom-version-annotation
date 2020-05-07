@@ -18,7 +18,7 @@ There are two versions `1.0` and `2.0`
 
 ---
 
-### Usage
+### Documentation
 
 Step 1, create the class that will be versioned, then ensure to put annotation of `@VersionHandler` this interface accepts a String as such you can put value such as `1.0` and `2.0`
 
@@ -38,7 +38,48 @@ Parameters Description:
 
 `endpoint` This field is the last check to drill down to only one method, as such if there are more than one method, the annotation logic will not work. 
 
+#### Sample Code
 
+File: Controller.java
+
+```java
+@RestController
+public class HomeController {
+
+    @Autowired
+    VersionHandlerController versionController;
+
+    @GetMapping("${bean.get.endpoint}")
+    public ResponseEntity getGreeting(@PathVariable String version){
+        return versionController.findVersionHandler("${bean.get.endpoint}", version, HttpMethod.GET);
+    }
+}
+```
+As you can see there is a `versionController` that is designed to do the processing for you. You should always call `findVersionHandler` method in the `versionController` with the needed parameters.
+
+In this example, I am passing the endpoint (its always good to put the enpoint in properties to ensure all the places where this endpoint is used - its consistent), followed by version that you will be either getting from path, query, header, or body. It should be following the format that is stated in the documentation above.
+
+Finally, the `HttpMethod` again it should be also correct, as the method will be mappted to its equivalent Handler annotation.
+
+*handler.java
+
+```java
+@Component
+@VersionHandler(version = "1.0")
+public class HomeHandler {
+
+    @VersionGetHandler(endpoint = "${bean.get.endpoint}")
+    public String getGreeting(){
+        return "Greeting from v1.0";
+    }
+}
+```
+
+First its needs to have `@Component` or else the logic would not be able to locate the bean. Secondly, it needs to have `@VersionHandler` annotation 
+as it is the another important annotation that will help with narrowing the search for the particular method to execute. 
+
+After which, in the method, should be annotated with `@VersionGetHandler` or `@VersionPostHandler` based on HttpMethod and the endpoint should match the one stated in the controller abvoe.
+ 
 ---
 
 ### Examples
