@@ -64,15 +64,17 @@ echo "Precommiting script started"
 
 mvn clean test
 
-# nohup mvn spring-boot:run &
+nohup mvn spring-boot:run &
 
 sleep 10
 
 cd karate/
 
-# mvn test -Dtest=testRunner
+mvn test -Dtest=testRunner
 
 cd ..
+
+kill $(lsof -ti:8081)
 
 echo "Successfully Completed"
 ```
