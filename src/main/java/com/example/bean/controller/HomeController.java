@@ -20,6 +20,11 @@ public class HomeController {
         return versionController.findVersionHandler("${bean.get.endpoint}", version, HttpMethod.GET);
     }
 
+    @GetMapping("${bean.get.endpoint.message.secondmessage}")
+    public ResponseEntity getGreetingWithDoubleMessage(@PathVariable String version, @PathVariable String message, @PathVariable String secondmessage){
+        return versionController.findVersionHandler("${bean.get.endpoint.message.secondmessage}", version, HttpMethod.GET, message, secondmessage);
+    }
+
     @GetMapping("${bean.get.endpoint.message}")
     public ResponseEntity getGreeting(@PathVariable String version, @PathVariable String message) {
         return versionController.findVersionHandler("${bean.get.endpoint.message}", version, HttpMethod.GET, message);

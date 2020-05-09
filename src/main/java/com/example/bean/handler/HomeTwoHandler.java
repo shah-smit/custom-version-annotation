@@ -14,6 +14,11 @@ public class HomeTwoHandler {
         return message+" v1.0";
     }
 
+    @VersionGetHandler(endpoint = "${bean.get.endpoint.message.secondmessage}")
+    public String giveMeGreeting(String message, String secondMessage){
+        return message+" "+secondMessage+" v1.0";
+    }
+
     @VersionPostHandler(endpoint = "${bean.post.endpoint.message}")
     public String getGreetingWithMessage(String message){
         return giveMeGreeting(message);
