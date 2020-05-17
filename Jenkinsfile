@@ -55,7 +55,7 @@ pipeline{
         stage('Functional Testing'){
             steps {
                 script {
-                    sh 'cd karate/ && mvn test -Dtest=KarateRunner'
+                    sh 'cd karate/ && mvn test -Dtest=testRunner'
                  }
             }
         }
