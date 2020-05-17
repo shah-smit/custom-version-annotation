@@ -54,7 +54,7 @@ pipeline{
 
         stage('Functional Testing'){
             steps {
-                script {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh 'cd karate/'
                     sh 'mvn test -Dtest=testRunner'
                  }
@@ -63,7 +63,7 @@ pipeline{
 
         stage('Kill Deployment'){
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                script {
                     sh 'kill $(lsof -ti:8081)'
                 }
             }
