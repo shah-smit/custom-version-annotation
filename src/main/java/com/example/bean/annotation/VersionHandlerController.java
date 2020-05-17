@@ -62,23 +62,19 @@ public class VersionHandlerController {
         Method[] methods = currentClass.getMethods();
         for (Method method : methods) {
 
-            if (method.isAnnotationPresent(VersionGetHandler.class)) {
-                if(httpMethod.matches("GET")) {
+            if (method.isAnnotationPresent(VersionGetHandler.class) && httpMethod.matches("GET")) {
                     VersionGetHandler versionGetHandler = method.getAnnotation(VersionGetHandler.class);
 
                     if (versionGetHandler.endpoint().equals(endpoint)) {
                         return method;
                     }
-                }
             }
-            if (method.isAnnotationPresent(VersionPostHandler.class)) {
-                if(httpMethod.matches("POST")) {
+            if (method.isAnnotationPresent(VersionPostHandler.class) && httpMethod.matches("POST")) {
                     VersionPostHandler versionPostHandler = method.getAnnotation(VersionPostHandler.class);
 
                     if (versionPostHandler != null && versionPostHandler.endpoint().equals(endpoint)) {
                         return method;
                     }
-                }
             }
         }
 

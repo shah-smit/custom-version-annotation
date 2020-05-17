@@ -7,8 +7,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.InvocationTargetException;
-
 @RestController
 public class HomeController {
 

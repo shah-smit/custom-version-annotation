@@ -1,7 +1,5 @@
 package com.example.bean.annotation;
 
-import org.springframework.http.HttpMethod;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
