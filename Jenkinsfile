@@ -55,16 +55,15 @@ pipeline{
         stage('Functional Testing'){
             steps {
                 script {
-                    sh 'cd karate/ && mvn test -Dtest=testRunner'
+                    sh 'cd karate/'
+                    sh 'mvn test -Dtest=testRunner'
                  }
             }
         }
 
-        stage('Kill Deployment'){
-            steps {
-                script {
-                    sh 'kill $(lsof -ti:8081)'
-                }
+        post {
+            always {
+                sh 'kill $(lsof -ti:8081)'
             }
         }
     }
