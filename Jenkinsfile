@@ -61,9 +61,11 @@ pipeline{
             }
         }
 
-        post {
-            always {
-                sh 'kill $(lsof -ti:8081)'
+        stage('Kill Deployment'){
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh 'kill $(lsof -ti:8081)'
+                }
             }
         }
     }
