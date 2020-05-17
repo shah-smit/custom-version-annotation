@@ -23,9 +23,9 @@ pipeline{
             steps {
                 withMaven(maven: 'maven_3_6_3'){
                     sh 'mvn sonar:sonar \
-                          -Dsonar.projectKey=com.example:DummyBank \
+                          -Dsonar.projectKey=custom-version-annotation \
                           -Dsonar.host.url=http://localhost:9000 \
-                          -Dsonar.login=e7650f6fa551d06c7aaab11094753729bd0022cc'
+                          -Dsonar.login=45f9e442543a68157c2534aa2ca96221354ebd7a'
                 }
             }
         }
@@ -41,7 +41,7 @@ pipeline{
         stage('Local Deploy'){
             steps {
                 script {
-                    sh 'nohup java -jar target/DummyBank-0.0.1-SNAPSHOT.jar &'
+                    sh 'nohup java -jar target/bean-0.0.1-SNAPSHOT.jar &'
                  }
              }
         }
@@ -63,7 +63,7 @@ pipeline{
         stage('Kill Deployment'){
             steps {
                 script {
-                    sh 'kill $(lsof -ti:8080)'
+                    sh 'kill $(lsof -ti:8081)'
                 }
             }
         }
