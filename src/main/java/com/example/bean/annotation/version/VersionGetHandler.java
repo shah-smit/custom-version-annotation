@@ -1,4 +1,4 @@
-package com.example.bean.annotation;
+package com.example.bean.annotation.version;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface VersionPostHandler {
+public @interface VersionGetHandler {
     public String endpoint() default "";
 }

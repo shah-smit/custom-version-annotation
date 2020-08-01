@@ -1,7 +1,7 @@
 package com.example.bean.handler;
 
-import com.example.bean.annotation.VersionGetHandler;
-import com.example.bean.annotation.VersionHandler;
+import com.example.bean.annotation.version.VersionGetHandler;
+import com.example.bean.annotation.version.VersionHandler;
 import org.springframework.stereotype.Component;
 
 @Component

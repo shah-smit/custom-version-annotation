@@ -1,4 +1,4 @@
-package com.example.bean.annotation;
+package com.example.bean.annotation.version;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
